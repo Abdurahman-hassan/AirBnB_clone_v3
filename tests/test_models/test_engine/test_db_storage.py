@@ -72,6 +72,7 @@ test_db_storage.py'])
 
 class TestDBStorage(unittest.TestCase):
     """Test the DBStorage class"""
+    @unittest.skipIf(SKIP_DB, "testing file storage")
     def test_get(self):
         """Test that get method returns the object based on class and id"""
         # Create and save a new object to the database
@@ -84,6 +85,7 @@ class TestDBStorage(unittest.TestCase):
         # Test get method with non-existing id
         self.assertIsNone(models.storage.get(State, "fake-id"))
 
+    @unittest.skipIf(SKIP_DB, "testing file storage")
     def test_count(self):
         """Test that count method returns the correct number of objects"""
         models.storage.reload()

@@ -113,24 +113,24 @@ class TestFileStorage(unittest.TestCase):
     def test_get_method(self):
         """Test that get method returns the object based on class and id"""
         # Create and save a new object
-        new_obj = State()
+        new_obj = State(name="Cairo")
         models.storage.new(new_obj)
         obj_id = new_obj.id
         # Use get method to retrieve the object
-        retrieved_obj = models.storage.get(State, obj_id)
+        retrieved_obj = models.storage.get("State", obj_id)
         self.assertEqual(retrieved_obj.id, obj_id)
         # Test get method with non-existing id
-        self.assertIsNone(models.storage.get(State, "fake-id"))
+        self.assertIsNone(models.storage.get("State", "fake-id"))
 
     @unittest.skipIf(models.storage_type == 'db', "not testing file storage")
     def test_count_method(self):
         """Test that count method returns the correct number of objects"""
         # Create and save a new object
         initial_count = models.storage.count()
-        state_count = models.storage.count(State)
-        new_obj = State()
+        state_count = models.storage.count("State")
+        new_obj = State(name="California")
         models.storage.new(new_obj)
         # Test count method with no class name
         self.assertEqual(models.storage.count(), initial_count + 1)
         # Test count method with class name
-        self.assertEqual(models.storage.count(State), state_count + 1)
+        self.assertEqual(models.storage.count("State"), state_count + 1)
