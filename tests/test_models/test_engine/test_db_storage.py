@@ -75,7 +75,7 @@ class TestDBStorage(unittest.TestCase):
     def test_get(self):
         """Test that get method returns the object based on class and id"""
         # Create and save a new object to the database
-        new_obj = State()
+        new_obj = State(name="Cairo")
         new_obj.save()
         obj_id = new_obj.id
         # Use get method to retrieve the object
